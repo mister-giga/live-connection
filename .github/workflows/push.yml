@@ -1,0 +1,19 @@
+name: Push
+on: 
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker login
+      env:
+        DOCKER_USER: mister-giga
+        DOCKER_PASSWORD: ${{secrets.PWD}}
+      run: |
+        docker login ghcr.io -u $DOCKER_USER -p $DOCKER_PASSWORD 
+    - name: Build the Docker image
+      run: docker build . -f Dockerfile --tag ghcr.io/mister-giga/live-connection
+    - name: Docker Push
+      run: docker push ghcr.io/mister-giga/live-connection
