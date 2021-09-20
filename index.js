@@ -8,7 +8,12 @@ app.use(express.urlencoded({
   extended: true
 }));
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require('socket.io')(http, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
 const port = process.env.PORT || 80;
 const Validator = require('jsonschema').Validator;
 const v = new Validator();
