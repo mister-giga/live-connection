@@ -37,8 +37,8 @@ app.post('/', (req, res) => {
         error = "source-project-name header is missing";
     } else if(!exists(projectKey)){
         error = "source-project-key header is missing";
-    } else if(!projectName.startsWith('live-connect-')) {
-        error = `source-project-name must start with 'live-connect-'`
+    } else if(!projectName.startsWith('live_connect_')) {
+        error = `source-project-name must start with 'live_connect_'`
     } else {
         const projectRealKey = process.env[projectName];
         
